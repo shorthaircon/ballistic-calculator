@@ -1,9 +1,9 @@
-const CACHE_NAME = 'ballistic-calculator-v12';
+const CACHE_NAME = 'ballistic-calculator-v17';
 const APP_SHELL = [
   './',
   './index.html',
-  './styles.css',
-  './app.js',
+  './styles.css?v=17',
+  './app.js?v=17',
   './ballistics.js',
   './manifest.webmanifest',
   './icons/icon.svg',

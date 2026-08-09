@@ -8,7 +8,7 @@
     <link rel="manifest" href="./manifest.webmanifest">
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="./icons/icon-192.png">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css?v=17">
     <title>彈道計算器</title>
   </head>
   <body>
@@ -37,7 +37,7 @@
             <label class="distance-field" for="distance-1">
               <span class="distance-field__label">距離</span>
               <span class="distance-field__control">
-                <input id="distance-1" class="distance-input" name="distance-1" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" spellcheck="false" aria-describedby="distance-help-1 distance-error-1" placeholder="0.00">
+                <input id="distance-1" class="distance-input" name="distance-1" type="text" inputmode="none" autocomplete="off" spellcheck="false" aria-describedby="distance-help-1 distance-error-1" aria-haspopup="dialog" aria-expanded="false" placeholder="0.00" readonly>
                 <span class="distance-field__unit" aria-hidden="true">km</span>
               </span>
             </label>
@@ -71,7 +71,7 @@
             <label class="distance-field" for="distance-2">
               <span class="distance-field__label">距離</span>
               <span class="distance-field__control">
-                <input id="distance-2" class="distance-input" name="distance-2" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" spellcheck="false" aria-describedby="distance-help-2 distance-error-2" placeholder="0.00">
+                <input id="distance-2" class="distance-input" name="distance-2" type="text" inputmode="none" autocomplete="off" spellcheck="false" aria-describedby="distance-help-2 distance-error-2" aria-haspopup="dialog" aria-expanded="false" placeholder="0.00" readonly>
                 <span class="distance-field__unit" aria-hidden="true">km</span>
               </span>
             </label>
@@ -105,7 +105,7 @@
             <label class="distance-field" for="distance-3">
               <span class="distance-field__label">距離</span>
               <span class="distance-field__control">
-                <input id="distance-3" class="distance-input" name="distance-3" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" spellcheck="false" aria-describedby="distance-help-3 distance-error-3" placeholder="0.00">
+                <input id="distance-3" class="distance-input" name="distance-3" type="text" inputmode="none" autocomplete="off" spellcheck="false" aria-describedby="distance-help-3 distance-error-3" aria-haspopup="dialog" aria-expanded="false" placeholder="0.00" readonly>
                 <span class="distance-field__unit" aria-hidden="true">km</span>
               </span>
             </label>
@@ -133,6 +133,37 @@
       </footer>
     </main>
 
-    <script type="module" src="./app.js"></script>
+    <div id="keypad-layer" class="keypad-layer" hidden>
+      <button class="keypad-backdrop" type="button" data-keypad-close aria-label="關閉數字鍵盤"></button>
+      <section class="calculator-keypad" role="dialog" aria-modal="true" aria-labelledby="keypad-title">
+        <header class="keypad-header">
+          <span id="keypad-title">輸入距離</span>
+          <output id="keypad-display" class="keypad-display" aria-live="polite">0.00</output>
+        </header>
+        <div class="keypad-grid" aria-label="數字鍵盤">
+          <button type="button" data-key="7">7</button>
+          <button type="button" data-key="8">8</button>
+          <button type="button" data-key="9">9</button>
+          <button type="button" data-key="backspace" aria-label="退格">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 6h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-6-6 6-6Z" />
+              <path d="m13 10 4 4m0-4-4 4" />
+            </svg>
+          </button>
+          <button type="button" data-key="4">4</button>
+          <button type="button" data-key="5">5</button>
+          <button type="button" data-key="6">6</button>
+          <button type="button" data-key="clear" aria-label="清除全部">C</button>
+          <button type="button" data-key="1">1</button>
+          <button type="button" data-key="2">2</button>
+          <button type="button" data-key="3">3</button>
+          <button class="keypad-done" type="button" data-key="done">完成</button>
+          <button class="keypad-zero" type="button" data-key="0">0</button>
+          <button type="button" data-key="decimal" aria-label="小數點">.</button>
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="./app.js?v=17"></script>
   </body>
 </html>

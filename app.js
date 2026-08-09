@@ -2,6 +2,10 @@ import { calculateAngles, CHARGES, parseDistance } from './ballistics.js';
 
 const targetPanels = [...document.querySelectorAll('.target-panel')];
 const appStatus = document.querySelector('#app-status');
+const keypadLayer = document.querySelector('#keypad-layer');
+const keypadDisplay = document.querySelector('#keypad-display');
+const keypadTitle = document.querySelector('#keypad-title');
+let activeInput = null;
 
 function createResultRows(list) {
   for (const { charge } of CHARGES) {
@@ -85,21 +89,121 @@ function updateTarget(panel) {
   renderResults(panel, parsed.distance);
 }
 
+function syncKeypadDisplay() {
+  keypadDisplay.textContent = activeInput?.value || '0.00';
+}
+
+function openKeypad(input) {
+  activeInput = input;
+  const targetNumber = input.closest('.target-panel').dataset.target;
+  keypadTitle.textContent = `輸入目標 ${targetNumber} 距離`;
+  keypadLayer.hidden = false;
+  document.body.classList.add('keypad-open');
+  input.setAttribute('aria-expanded', 'true');
+  syncKeypadDisplay();
+  requestAnimationFrame(() => {
+    input.scrollIntoView({ block: 'center' });
+  });
+}
+
+function closeKeypad() {
+  if (activeInput) activeInput.setAttribute('aria-expanded', 'false');
+  keypadLayer.hidden = true;
+  document.body.classList.remove('keypad-open');
+}
+
+function setActiveValue(value) {
+  if (!activeInput) return;
+  activeInput.value = value;
+  activeInput.dispatchEvent(new Event('input', { bubbles: true }));
+  syncKeypadDisplay();
+}
+
+function pressKey(key) {
+  if (!activeInput) return;
+  const current = activeInput.value;
+
+  if (/^\d$/.test(key)) {
+    if (current.length >= 6) return;
+    setActiveValue(current === '0' ? key : `${current}${key}`);
+    return;
+  }
+
+  if (key === 'decimal') {
+    if (!current.includes('.') && !current.includes(',')) {
+      setActiveValue(current ? `${current}.` : '0.');
+    }
+    return;
+  }
+
+  if (key === 'backspace') {
+    setActiveValue(current.slice(0, -1));
+    return;
+  }
+
+  if (key === 'clear') {
+    setActiveValue('');
+    return;
+  }
+
+  if (key === 'done') closeKeypad();
+}
+
 for (const panel of targetPanels) {
   const input = panel.querySelector('.distance-input');
+  const inputControl = panel.querySelector('.distance-field__control');
   const clearButton = panel.querySelector('[data-clear-distance]');
   const list = panel.querySelector('.results-list');
   createResultRows(list);
   input.value = '';
   input.addEventListener('input', () => updateTarget(panel));
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openKeypad(input);
+    }
+  });
+  inputControl.addEventListener('click', () => openKeypad(input));
   clearButton.addEventListener('mousedown', (event) => event.preventDefault());
   clearButton.addEventListener('click', () => {
     input.value = '';
     updateTarget(panel);
     input.focus({ preventScroll: true });
+    openKeypad(input);
   });
   showEmptyState(panel);
 }
+
+keypadLayer.querySelector('[data-keypad-close]').addEventListener('click', closeKeypad);
+
+for (const button of keypadLayer.querySelectorAll('[data-key]')) {
+  button.addEventListener('pointerdown', (event) => event.preventDefault());
+  button.addEventListener('click', () => pressKey(button.dataset.key));
+}
+
+document.addEventListener('keydown', (event) => {
+  if (keypadLayer.hidden || !activeInput) return;
+
+  if (/^\d$/.test(event.key)) {
+    event.preventDefault();
+    pressKey(event.key);
+  } else if (event.key === '.' || event.key === ',') {
+    event.preventDefault();
+    pressKey('decimal');
+  } else if (event.key === 'Backspace') {
+    event.preventDefault();
+    pressKey('backspace');
+  } else if (event.key === 'Delete') {
+    event.preventDefault();
+    pressKey('clear');
+  } else if (event.key === 'Enter') {
+    event.preventDefault();
+    pressKey('done');
+  } else if (event.key === 'Escape') {
+    event.preventDefault();
+    closeKeypad();
+  }
+});
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
