@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#080c14">
+    <meta name="description" content="同時計算三個目標的六種裝藥彈道角度。">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
+    <link rel="stylesheet" href="./styles.css">
+    <title>彈道計算器</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="./icons/icon.svg" alt="">
+        </div>
+        <div>
+          <p class="eyebrow">BALLISTIC CALCULATOR</p>
+          <h1>彈道計算器</h1>
+        </div>
+      </header>
+
+      <section class="targets-grid" aria-label="三個目標距離與裝藥角度">
+        <article class="target-panel" data-target="1">
+          <header class="target-heading">
+            <div>
+              <p class="target-index">TARGET 01</p>
+              <h2>目標 1</h2>
+            </div>
+            <span class="range-badge">0–30 km</span>
+          </header>
+
+          <div class="distance-entry">
+            <label class="distance-field" for="distance-1">
+              <span class="distance-field__label">距離</span>
+              <span class="distance-field__control">
+                <input id="distance-1" class="distance-input" name="distance-1" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" spellcheck="false" aria-describedby="distance-help-1 distance-error-1" placeholder="0.00">
+                <span class="distance-field__unit" aria-hidden="true">km</span>
+              </span>
+            </label>
+            <button class="clear-distance" type="button" data-clear-distance aria-label="清除目標 1 距離">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+          </div>
+          <p id="distance-help-1" class="visually-hidden">請輸入 0～30 km 的目標距離。</p>
+          <p id="distance-error-1" class="error-message" role="alert" aria-live="assertive"></p>
+
+          <div class="results-heading">
+            <h3>裝藥角度</h3>
+            <span class="limit-badge"><span aria-hidden="true">≤</span> 60°</span>
+          </div>
+          <p class="empty-state">等待輸入距離</p>
+          <ol class="results-list" aria-live="polite" aria-atomic="true" hidden></ol>
+        </article>
+
+        <article class="target-panel" data-target="2">
+          <header class="target-heading">
+            <div>
+              <p class="target-index">TARGET 02</p>
+              <h2>目標 2</h2>
+            </div>
+            <span class="range-badge">0–30 km</span>
+          </header>
+
+          <div class="distance-entry">
+            <label class="distance-field" for="distance-2">
+              <span class="distance-field__label">距離</span>
+              <span class="distance-field__control">
+                <input id="distance-2" class="distance-input" name="distance-2" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" spellcheck="false" aria-describedby="distance-help-2 distance-error-2" placeholder="0.00">
+                <span class="distance-field__unit" aria-hidden="true">km</span>
+              </span>
+            </label>
+            <button class="clear-distance" type="button" data-clear-distance aria-label="清除目標 2 距離">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+          </div>
+          <p id="distance-help-2" class="visually-hidden">請輸入 0～30 km 的目標距離。</p>
+          <p id="distance-error-2" class="error-message" role="alert" aria-live="assertive"></p>
+
+          <div class="results-heading">
+            <h3>裝藥角度</h3>
+            <span class="limit-badge"><span aria-hidden="true">≤</span> 60°</span>
+          </div>
+          <p class="empty-state">等待輸入距離</p>
+          <ol class="results-list" aria-live="polite" aria-atomic="true" hidden></ol>
+        </article>
+
+        <article class="target-panel" data-target="3">
+          <header class="target-heading">
+            <div>
+              <p class="target-index">TARGET 03</p>
+              <h2>目標 3</h2>
+            </div>
+            <span class="range-badge">0–30 km</span>
+          </header>
+
+          <div class="distance-entry">
+            <label class="distance-field" for="distance-3">
+              <span class="distance-field__label">距離</span>
+              <span class="distance-field__control">
+                <input id="distance-3" class="distance-input" name="distance-3" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" spellcheck="false" aria-describedby="distance-help-3 distance-error-3" placeholder="0.00">
+                <span class="distance-field__unit" aria-hidden="true">km</span>
+              </span>
+            </label>
+            <button class="clear-distance" type="button" data-clear-distance aria-label="清除目標 3 距離">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+          </div>
+          <p id="distance-help-3" class="visually-hidden">請輸入 0～30 km 的目標距離。</p>
+          <p id="distance-error-3" class="error-message" role="alert" aria-live="assertive"></p>
+
+          <div class="results-heading">
+            <h3>裝藥角度</h3>
+            <span class="limit-badge"><span aria-hidden="true">≤</span> 60°</span>
+          </div>
+          <p class="empty-state">等待輸入距離</p>
+          <ol class="results-list" aria-live="polite" aria-atomic="true" hidden></ol>
+        </article>
+      </section>
+
+      <footer class="app-footer">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="app-status">本機計算 · 不會儲存資料</span>
+      </footer>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

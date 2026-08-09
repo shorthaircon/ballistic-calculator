@@ -1,0 +1,10 @@
+{
+  "name": "game-ballistic-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-isolation=none",
+    "serve": "py -3 -m http.server 8080"
+  }
+}

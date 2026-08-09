@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">高爆彈向右上飛行的遊戲彈道計算器圖示</title>
+  <defs>
+    <radialGradient id="paper" cx="38%" cy="32%" r="85%">
+      <stop stop-color="#eee3bf"/><stop offset="1" stop-color="#b9a980"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#191b16"/>
+  <path d="M56 110l54-54h318l28 34v332l-34 34H90l-34-42z" fill="url(#paper)" stroke="#4a4536" stroke-width="14"/>
+  <path d="M74 126l52-52M392 74h42M74 390v42M404 438l34-34" stroke="#786f57" stroke-width="8"/>
+  <g transform="rotate(-45 256 256)">
+    <path d="M92 211h204c43 0 84 16 130 45-46 29-87 45-130 45H92z" fill="#080908" stroke="#22241d" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M148 214v84M165 256h72" fill="none" stroke="#f2e9ca" stroke-width="12"/>
+    <text x="181" y="276" fill="#f2e9ca" font-family="Arial Black, sans-serif" font-size="53" font-weight="900">HE</text>
+    <path d="M76 230H39M76 256H22M76 282H42" fill="none" stroke="#a02e23" stroke-width="17" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+# Local design references and discarded icon concepts
+/參考圖片/
+/icons/candidates/
+
+# Local tooling artifacts
+/node_modules/
+Thumbs.db
+.DS_Store
