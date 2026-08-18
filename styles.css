@@ -447,14 +447,25 @@ h3 {
 }
 
 .app-footer {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   min-height: 48px;
   margin-top: 16px;
+  padding: 0 44px;
   color: var(--color-text-muted);
   font-size: 0.8rem;
+}
+
+.app-version {
+  position: absolute;
+  right: 0;
+  opacity: 0.55;
+  font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .status-dot {

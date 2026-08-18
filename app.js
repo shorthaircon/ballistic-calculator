@@ -2,6 +2,7 @@ import { calculateAngles, CHARGES, parseDistance } from './ballistics.js';
 
 const targetPanels = [...document.querySelectorAll('.target-panel')];
 const appStatus = document.querySelector('#app-status');
+const appVersion = document.querySelector('#app-version');
 const keypadLayer = document.querySelector('#keypad-layer');
 const keypadDisplay = document.querySelector('#keypad-display');
 const keypadTitle = document.querySelector('#keypad-title');
@@ -173,6 +174,9 @@ for (const panel of targetPanels) {
   });
   showEmptyState(panel);
 }
+
+const assetVersion = new URL(import.meta.url).searchParams.get('v');
+appVersion.textContent = assetVersion ? `v${assetVersion}` : '';
 
 keypadLayer.querySelector('[data-keypad-close]').addEventListener('click', closeKeypad);
 
