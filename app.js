@@ -176,9 +176,19 @@ for (const panel of targetPanels) {
 
 keypadLayer.querySelector('[data-keypad-close]').addEventListener('click', closeKeypad);
 
+const INSTANT_KEYS = new Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'decimal', 'backspace', 'clear']);
+
 for (const button of keypadLayer.querySelectorAll('[data-key]')) {
-  button.addEventListener('pointerdown', (event) => event.preventDefault());
-  button.addEventListener('click', () => pressKey(button.dataset.key));
+  const key = button.dataset.key;
+  button.addEventListener('pointerdown', (event) => {
+    if (!event.isPrimary || event.button > 0) return;
+    event.preventDefault();
+    if (INSTANT_KEYS.has(key)) pressKey(key);
+  });
+  button.addEventListener('click', (event) => {
+    if (INSTANT_KEYS.has(key) && event.detail !== 0) return;
+    pressKey(key);
+  });
 }
 
 document.addEventListener('keydown', (event) => {

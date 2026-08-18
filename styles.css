@@ -500,6 +500,7 @@ h3 {
   box-shadow:
     inset 0 1px 0 rgb(245 231 185 / 12%),
     0 -16px 44px rgb(0 0 0 / 48%);
+  touch-action: none;
 }
 
 .keypad-header {
@@ -554,6 +555,9 @@ h3 {
   font-weight: 750;
   cursor: pointer;
   touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
 }
 
